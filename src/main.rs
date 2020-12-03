@@ -9,11 +9,16 @@ fn main() {
     let mut seen = HashSet::new();
     for line in lines {
         let x: i64 = line.unwrap().parse::<i64>().expect("Couldn't parse line!");
-        if seen.contains(&x){
-            println!("{} * {} = {}",x,2020-x,x * (2020-x));
-        } else {
-            seen.insert(2020-x);
-        }
+        seen.insert(x);
     }
 
+    for first in seen.iter(){
+        let remainder = 2020 - first;
+        for second in seen.iter(){
+            let third = remainder - second;
+            if seen.contains(&third) {
+                println!("{} * {} * {} = {}",first,second,third,first*second*third);
+            }
+        }
+    }
 }
